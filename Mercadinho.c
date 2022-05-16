@@ -6,7 +6,7 @@
 #include <time.h>
 #define RGSTRS "REGISTROS"
 
-struct Produto
+struct DadosDoProduto
 {
     int codigo;
     int codigo2;
@@ -16,9 +16,9 @@ struct Produto
     float valor;
     int unidades;
 };
-struct Produto dados;
-struct Produto dados2;
-struct Produto dados3;
+struct DadosDoProduto dados;
+struct DadosDoProduto dados2;
+struct DadosDoProduto dados3;
 
 struct DataEHorario
 {
@@ -67,7 +67,7 @@ int dataDeValidade(char alternativa)
 
     else if((alternativa == 's') || (alternativa == 'S'))
     {
-        printf("IMFORME A DATA DE VALIDADE:\n");
+        printf("INFORME A DATA DE VALIDADE:\n");
         scanf("%d %d %d", &dia, &mes, &ano);
 
         if(verificarData(dia, mes, ano) == true)
@@ -84,7 +84,7 @@ int dataDeValidade(char alternativa)
             system("pause");
             system("cls");
 
-            printf("IMFORME A DATA DE VALIDADE:\n");
+            printf("INFORME A DATA DE VALIDADE:\n");
             scanf("%d %d %d", &dia, &mes, &ano);
             printf("\n");
 
@@ -457,7 +457,7 @@ int Vendas()
 
     printf("\n\n\t\t\t\t\t[VENDA DE PRODUTOS]\n\n");
     fflush(stdin);
-    printf("\nIMFORME O CÓDIGO DO PRODUTO:\nEST");
+    printf("\nINFORME O CÓDIGO DO PRODUTO:\nEST");
     fflush(stdin);
     scanf("%d", &codigo_2);
     fflush(stdin);
@@ -467,7 +467,7 @@ int Vendas()
     {
         while(dados3.codigo != codigo_2)
         {
-            printf("\nCÓDIGO INVÁLIDO!\nIMFORME O CÓDIGO DO PRODUTO:\nEST");
+            printf("\nCÓDIGO INVÁLIDO!\nINFORME O CÓDIGO DO PRODUTO:\nEST");
             scanf("%d", &codigo_2);
             fflush(stdin);
             lerInfoProduto(codigo_2);
@@ -724,7 +724,7 @@ void main()
     while(repetir)
     {
         menu();
-        printf("IMFORME A OPÇÃO DESEJADA: ");
+        printf("INFORME A OPÇÃO DESEJADA: ");
         scanf("%d", &opcao);
         system("cls");
         comandos(opcao);
