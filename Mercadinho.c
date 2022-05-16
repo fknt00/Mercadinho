@@ -10,9 +10,9 @@ struct Produto
 {
     int codigo;
     int codigo2;
-    char nome[40];
-    char descricao[250];
-    char lote[20];
+    char nome[72];
+    char descricao[420];
+    char lote[36];
     float valor;
     int unidades;
 };
@@ -67,7 +67,7 @@ int dataDeValidade(char alternativa)
 
     else if((alternativa == 's') || (alternativa == 'S'))
     {
-        printf("DIGITE A DATA DE VALIDADE:\n");
+        printf("IMFORME A DATA DE VALIDADE:\n");
         scanf("%d %d %d", &dia, &mes, &ano);
 
         if(verificarData(dia, mes, ano) == true)
@@ -80,11 +80,11 @@ int dataDeValidade(char alternativa)
         else if((alternativa == 's') || (alternativa == 'S'))
         {
             system("cls");
-            printf("DATA INVÁLIDA!\nDIGITE NOVAMENTE.\n\n");
+            printf("DATA INVÁLIDA!\nIMFORME NOVAMENTE.\n\n");
             system("pause");
             system("cls");
 
-            printf("DIGITE A DATA DE VALIDADE:\n");
+            printf("IMFORME A DATA DE VALIDADE:\n");
             scanf("%d %d %d", &dia, &mes, &ano);
             printf("\n");
 
@@ -98,7 +98,7 @@ int dataDeValidade(char alternativa)
             else
             {
                 system("cls");
-                printf("DATA INVÁLIDA!\nDIGITE NOVAMENTE.\n\n");
+                printf("DATA INVÁLIDA!\nIMFORME NOVAMENTE.\n\n");
                 system("pause");
                 system("cls");
                 dataDeValidade(alternativa);
@@ -457,7 +457,7 @@ int Vendas()
 
     printf("\n\n\t\t\t\t\t[VENDA DE PRODUTOS]\n\n");
     fflush(stdin);
-    printf("\nDIGITE O CÓDIGO DO PRODUTO:\nEST");
+    printf("\nIMFORME O CÓDIGO DO PRODUTO:\nEST");
     fflush(stdin);
     scanf("%d", &codigo_2);
     fflush(stdin);
@@ -467,7 +467,7 @@ int Vendas()
     {
         while(dados3.codigo != codigo_2)
         {
-            printf("\nCÓDIGO INVÁLIDO!\nDIGITE O CÓDIGO DO PRODUTO:\nEST");
+            printf("\nCÓDIGO INVÁLIDO!\nIMFORME O CÓDIGO DO PRODUTO:\nEST");
             scanf("%d", &codigo_2);
             fflush(stdin);
             lerInfoProduto(codigo_2);
@@ -507,7 +507,7 @@ int Vendas()
     fflush(stdin);
     while(unidades <= 0 || unidades > dados3.unidades)
     {
-        printf("\nQUANTIDADE INVÁLIDA!\nINSIRA A QUANTIDADE:\n");
+        printf("\nQUANTIDADE INVÁLIDA!\nINSIRA A QUANTIDADE NOVAMENTE:\n");
         scanf("%d", &unidades);
         fflush(stdin);
     }
@@ -515,7 +515,7 @@ int Vendas()
     produtoVendido(codigo_2, unidades, dia, mes, ano, i);
     printf("\nVALOR TOTAL: R$%.2f\n\n", dados3.valor * unidades);
 
-    vendas = fopen("HISTORICO_VENDAS.txt", "a+");
+    vendas = fopen("HISTORICO_DE_VENDAS.txt", "a+");
 
     fprintf(vendas, "%d\n", dados3.codigo);
     fprintf(vendas, "%d\n", codigoDaVenda());
@@ -583,7 +583,7 @@ void cadastro()
     fflush(stdin);
     while(cadastro.valor <= 0)
     {
-        printf("\nO VALOR INSERIDO É INVÁLIDO!\nINSERIDO O VALOR:\n");
+        printf("\nO VALOR INSERIDO É INVÁLIDO!\nINFORME O VALOR:\n");
         scanf("%f", &cadastro.valor);
         fflush(stdin);
     }
@@ -634,7 +634,7 @@ int comandos(int opcao)
                 break;
         case 5:
                 system("cls");
-                arquivo = fopen("HISTORICO_VENDAS.txt", "r");
+                arquivo = fopen("HISTORICO_DE_VENDAS.txt", "r");
                 listar(arquivo);
                 system("pause");
                 system("cls");
@@ -724,7 +724,7 @@ void main()
     while(repetir)
     {
         menu();
-        printf("DIGITE A OPÇÃO DESEJADA: ");
+        printf("IMFORME A OPÇÃO DESEJADA: ");
         scanf("%d", &opcao);
         system("cls");
         comandos(opcao);
