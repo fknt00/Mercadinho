@@ -15,18 +15,32 @@ struct Dados
     char lote[20];
     float valor;
     int unidades;
-    int dia, mes, ano;
-    int horas, minutos, segundos;
 };
 
-//struct Dados cadastro;
+// struct Dados cadastro;
 struct Dados dados;
 struct Dados dados2;
 struct Dados dados3;
-struct Dados agora;
-struct Dados validade;
+// struct Dados agora;
+// struct Dados validade;
 
-bool VerifData(int dia, int mes, int ano)
+
+struct DataEHorario
+{
+    int dia, mes, ano;
+    int horas, minutos, segundos;
+};
+struct DataEHorario data_e_horario;
+
+
+struct Validade
+{
+    int dia, mes, ano;
+};
+struct Validade validade;
+
+
+bool verificarData(int dia, int mes, int ano)
 {
     if(ano>=1900 && ano<=2200)
     {
@@ -45,7 +59,7 @@ bool VerifData(int dia, int mes, int ano)
         return false;
 }
 
-int DataDeValidade(char alternativa)
+int dataDeValidade(char alternativa)
 {
     int dia, mes, ano;
 
@@ -62,7 +76,7 @@ int DataDeValidade(char alternativa)
         printf("DIGITE A DATA DE VALIDADE:\n");
         scanf("%d %d %d", &dia, &mes, &ano);
 
-        if(VerifData(dia, mes, ano) == true)
+        if(verificarData(dia, mes, ano) == true)
         {
             validade.dia = dia;
             validade.mes = mes;
@@ -80,7 +94,7 @@ int DataDeValidade(char alternativa)
             scanf("%d %d %d", &dia, &mes, &ano);
             printf("\n");
 
-            if(VerifData(dia, mes, ano) == true)
+            if(verificarData(dia, mes, ano) == true)
             {
                 validade.dia = dia;
                 validade.mes = mes;
@@ -93,7 +107,7 @@ int DataDeValidade(char alternativa)
                 printf("DATA INVÁLIDA!\nDIGITE NOVAMENTE.\n\n");
                 system("pause");
                 system("cls");
-                DataDeValidade(alternativa);
+                dataDeValidade(alternativa);
             }
         }
     }
@@ -104,23 +118,22 @@ int DataDeValidade(char alternativa)
 return 0;
 }
 
-void ObterDataEHora()
+void obterDataEHorario()
 {
     struct tm *local;
     time_t t;
     t = time(NULL);
     local=localtime(&t);
 
-    agora.ano = local -> tm_year+1900;
-    agora.mes = local -> tm_mon+1;
-    agora.dia = local -> tm_mday;
-    agora.horas = local -> tm_hour;
-    agora.minutos = local -> tm_min;
-    agora.segundos = local -> tm_sec;
+    data_e_horarioano = local -> tm_year+1900;
+    data_e_horariomes = local -> tm_mon+1;
+    data_e_horariodia = local -> tm_mday;
+    data_e_horariohoras = local -> tm_hour;
+    data_e_horariominutos = local -> tm_min;
+    data_e_horariosegundos = local -> tm_sec;
 }
 
-
-int Listar(FILE *arquivo)
+int listar(FILE *arquivo)
 {
     if(arquivo == NULL)
     {
@@ -147,7 +160,7 @@ int Listar(FILE *arquivo)
         fflush(stdin);
 
         if(dados.codigo2 != 0)
-            fscanf(arquivo, "%d %d %d %d %d %d\n", &agora.dia, &agora.mes, &agora.ano, &agora.horas, &agora.minutos, &agora.segundos);
+            fscanf(arquivo, "%d %d %d %d %d %d\n", &data_e_horariodia, &data_e_horariomes, &data_e_horarioano, &data_e_horariohoras, &data_e_horariominutos, &data_e_horariosegundos);
 
         else
             fscanf(arquivo, "\n");
@@ -196,15 +209,15 @@ int Listar(FILE *arquivo)
         }
         else if(dados.codigo2 != 0)
         {
-            printf("HORARIO DA VENDA:\t%02d:%02d:%02d\n", agora.horas, agora.minutos, agora.segundos);
-            printf("DATA DA VENDA:\t\t%02d/%02d/%04d\n\n\n", agora.dia, agora.mes, agora.ano);
+            printf("HORARIO DA VENDA:\t%02d:%02d:%02d\n", data_e_horariohoras, data_e_horariominutos, data_e_horariosegundos);
+            printf("DATA DA VENDA:\t\t%02d/%02d/%04d\n\n\n", data_e_horariodia, data_e_horariomes, data_e_horarioano);
         }
     }
 
     fclose(arquivo);
 }
 
-int CodigoVnd()
+int codigoDaVenda()
 {
     int codVnd = 8210870;
     FILE *codigoVnd;
@@ -230,7 +243,7 @@ int CodigoVnd()
     }
 }
 
-int CodigoEst(int *pont)
+int codigoDoEstoque(int *pont)
 {
     int codEst = 4210870;
     FILE *codigoEst;
@@ -274,7 +287,7 @@ void RealocarDadosEstoque()
     fclose(destino);
 }
 
-void AtualizarEstoque(int unidades, int codigo, int i)
+void atualizarEstoque(int unidades, int codigo, int i)
 {
     int j;
 
@@ -511,17 +524,17 @@ int Vendas()
     vendas = fopen("HISTORICO_VENDAS.txt", "a+");
 
     fprintf(vendas, "%d\n", dados3.codigo);
-    fprintf(vendas, "%d\n", CodigoVnd());
+    fprintf(vendas, "%d\n", codigoDaVenda());
     fputs(dados3.nome, vendas);
     fputs(dados3.descricao, vendas);
     fputs(dados3.lote, vendas);
     fprintf(vendas, "%.2f\n", dados3.valor*unidades);
     fprintf(vendas, "%d\n", unidades);
-    ObterDataEHora();
+    obterDataEHorario();
     fprintf(vendas, "%02d %02d %04d\n", validade.dia, validade.mes, validade.ano);
-    fprintf(vendas, "%02d %02d %04d %02d %02d %02d\n", agora.dia, agora.mes, agora.ano, agora.horas, agora.minutos, agora.segundos);
+    fprintf(vendas, "%02d %02d %04d %02d %02d %02d\n", data_e_horariodia, data_e_horariomes, data_e_horarioano, data_e_horariohoras, data_e_horariominutos, data_e_horariosegundos);
     fclose(vendas);
-    AtualizarEstoque(unidades, codigo_2, i);
+    atualizarEstoque(unidades, codigo_2, i);
 }
 
 struct Cadastro
@@ -535,7 +548,7 @@ struct Cadastro
 struct Cadastro cadastro;
 
 
-void Cadastro()
+void cadastro()
 {
     FILE *cadastro, *lote;
 
@@ -581,7 +594,7 @@ void Cadastro()
         fflush(stdin);
     }
 
-    CodigoEst(&cadastro.codigo);
+    codigoDoEstoque(&cadastro.codigo);
     cadastro = fopen("ESTOQUE.txt", "a+");
     fprintf(cadastro, "%d\n", cadastro.codigo);
     fputs(cadastro.nome, cadastro);
@@ -598,7 +611,7 @@ void Cadastro()
 }
 
 
-int Comandos(int opcao)
+int comandos(int opcao)
 {
     switch(opcao)
    {
@@ -606,7 +619,7 @@ int Comandos(int opcao)
 
         case 1:
                 system("cls");
-                Cadastro();
+                cadastro();
                 system("pause");
                 system("cls");
                 break;
@@ -628,7 +641,7 @@ int Comandos(int opcao)
         case 5:
                 system("cls");
                 arquivo = fopen("HISTORICO_VENDAS.txt", "r");
-                Listar(arquivo);
+                listar(arquivo);
                 system("pause");
                 system("cls");
                 break;
@@ -636,7 +649,7 @@ int Comandos(int opcao)
                 system("cls");
                 dados.codigo2 = 0;
                 arquivo = fopen("ESTOQUE.txt", "r");
-                Listar(arquivo);
+                listar(arquivo);
                 system("pause");
                 system("cls");
                 break;
@@ -661,7 +674,7 @@ int Comandos(int opcao)
     }
 }
 
-void Menu()
+void menu()
 {
     printf("\n\n");
     printf("\t\t\t  ########################################################  \n");
@@ -716,11 +729,10 @@ void main()
 
     while(repetir)
     {
-        Menu();
+        menu();
         printf("DIGITE A OPÇÃO DESEJADA: ");
         scanf("%d", &opcao);
         system("cls");
-        Comandos(opcao);
+        comandos(opcao);
     }
 }
-
