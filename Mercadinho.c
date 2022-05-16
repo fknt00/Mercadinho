@@ -17,8 +17,11 @@ struct DadosDoProduto
     int unidades;
 };
 struct DadosDoProduto dados;
-struct DadosDoProduto dados2;
+// struct DadosDoProduto dados2;
 struct DadosDoProduto dados3;
+struct DadosDoProduto produto;
+struct DadosDoProduto produto_2;
+struct DadosDoProduto produto_3;
 
 struct DataEHorario
 {
@@ -296,43 +299,43 @@ void atualizarEstoque(int unidades, int codigo, int i)
     {
         for(j = 0; !feof(arq2); j++)
         {
-            fscanf(arq, "%d\n", &dados2.codigo);
+            fscanf(arq, "%d\n", &produto_2.codigo);
             fflush(stdin);
-            fgets(dados2.nome, 40, arq);
-            fgets(dados2.descricao, 250, arq);
+            fgets(produto_2.nome, 40, arq);
+            fgets(produto_2.descricao, 250, arq);
             fflush(stdin);
-            fgets(dados2.lote, 20, arq);
+            fgets(produto_2.lote, 20, arq);
             fflush(stdin);
-            fscanf(arq, "%f\n", &dados2.valor);
+            fscanf(arq, "%f\n", &produto_2.valor);
             fflush(stdin);
-            fscanf(arq, "%d\n", &dados2.unidades);
+            fscanf(arq, "%d\n", &produto_2.unidades);
             fflush(stdin);
-            fscanf(arq, "%d %d %d\n", &dados2.dia, &dados2.mes, &dados2.ano);
+            fscanf(arq, "%d %d %d\n", &produto_2.dia, &produto_2.mes, &produto_2.ano);
             fflush(stdin);
 
-            fscanf(arq2, "%d\n", &dados3.codigo);
+            fscanf(arq2, "%d\n", &produto_3.codigo);
             fflush(stdin);
-            fgets(dados3.nome, 40, arq2);
-            fgets(dados3.descricao, 250, arq2);
+            fgets(produto_3.nome, 40, arq2);
+            fgets(produto_3.descricao, 250, arq2);
             fflush(stdin);
-            fgets(dados3.lote, 20, arq2);
+            fgets(produto_3.lote, 20, arq2);
             fflush(stdin);
-            fscanf(arq2, "%f\n", &dados3.valor);
+            fscanf(arq2, "%f\n", &produto_3.valor);
             fflush(stdin);
-            fscanf(arq2, "%d\n", &dados3.unidades);
+            fscanf(arq2, "%d\n", &produto_3.unidades);
             fflush(stdin);
             fscanf(arq2, "%d %d %d\n", &validade.dia, &validade.mes, &validade.ano);
             fflush(stdin);
 
-            if(codigo == dados3.codigo)
+            if(codigo == produto_3.codigo)
             {
-                fprintf(arq3, "%d\n", dados3.codigo);
-                fputs(dados3.nome, arq3);
-                fputs(dados3.descricao, arq3);
-                fputs(dados3.lote, arq3);
-                fprintf(arq3, "%.2f", dados3.valor);
+                fprintf(arq3, "%d\n", produto_3.codigo);
+                fputs(produto_3.nome, arq3);
+                fputs(produto_3.descricao, arq3);
+                fputs(produto_3.lote, arq3);
+                fprintf(arq3, "%.2f", produto_3.valor);
                 fprintf(arq3, "\n");
-                fprintf(arq3, "%d", dados3.unidades-unidades);
+                fprintf(arq3, "%d", produto_3.unidades-unidades);
                 fprintf(arq3, "\n");
                 fprintf(arq3, "%02d %02d %04d", validade.dia, validade.mes, validade.ano);
                 fprintf(arq3, "\n");
@@ -340,13 +343,13 @@ void atualizarEstoque(int unidades, int codigo, int i)
 
             else
             {
-                fprintf(arq3, "%d\n", dados3.codigo);
-                fputs(dados3.nome, arq3);
-                fputs(dados3.descricao, arq3);
-                fputs(dados3.lote, arq3);
-                fprintf(arq3, "%.2f", dados3.valor);
+                fprintf(arq3, "%d\n", produto_3.codigo);
+                fputs(produto_3.nome, arq3);
+                fputs(produto_3.descricao, arq3);
+                fputs(produto_3.lote, arq3);
+                fprintf(arq3, "%.2f", produto_3.valor);
                 fprintf(arq3, "\n");
-                fprintf(arq3, "%d", dados3.unidades);
+                fprintf(arq3, "%d", produto_3.unidades);
                 fprintf(arq3, "\n");
                 fprintf(arq3, "%02d %02d %04d", validade.dia, validade.mes, validade.ano);
                 fprintf(arq3, "\n");
@@ -374,29 +377,29 @@ int produtoVendido(int codigo_2, int unidades, int dia, int mes, int ano, int i)
 
     for(i = 0; !feof(arq2); i++)
     {
-        fscanf(arq2, "%d\n", &dados3.codigo);
+        fscanf(arq2, "%d\n", &produto_3.codigo);
         fflush(stdin);
-        fgets(dados3.nome, 40, arq2);
-        fgets(dados3.descricao, 250, arq2);
+        fgets(produto_3.nome, 40, arq2);
+        fgets(produto_3.descricao, 250, arq2);
         fflush(stdin);
-        fgets(dados3.lote, 20, arq2);
+        fgets(produto_3.lote, 20, arq2);
         fflush(stdin);
-        fscanf(arq2, "%f\n", &dados3.valor);
+        fscanf(arq2, "%f\n", &produto_3.valor);
         fflush(stdin);
-        fscanf(arq2, "%d\n", &dados3.unidades);
+        fscanf(arq2, "%d\n", &produto_3.unidades);
         fflush(stdin);
         fscanf(arq2, "%d %d %d\n", &validade.dia, &validade.mes, &validade.ano);
         fflush(stdin);
 
-        if(codigo_2 == dados3.codigo)
+        if(codigo_2 == produto_3.codigo)
         {
-            fprintf(arq, "%d\n", dados3.codigo);
-            fputs(dados3.nome, arq);
-            fputs(dados3.descricao, arq);
-            fputs(dados3.lote, arq);
-            fprintf(arq, "%.2f", dados3.valor);
+            fprintf(arq, "%d\n", produto_3.codigo);
+            fputs(produto_3.nome, arq);
+            fputs(produto_3.descricao, arq);
+            fputs(produto_3.lote, arq);
+            fprintf(arq, "%.2f", produto_3.valor);
             fprintf(arq, "\n");
-            fprintf(arq, "%d", dados3.unidades-unidades);
+            fprintf(arq, "%d", produto_3.unidades-unidades);
             fprintf(arq, "\n");
             fprintf(arq, "%02d %02d %04d", validade.dia, validade.mes, validade.ano);
             fprintf(arq, "\n");
@@ -419,21 +422,21 @@ int lerInfoProduto(int codigo_2)
 
     for(i = 0; !feof(estoque); i++)
     {
-        fscanf(estoque, "%d\n", &dados3.codigo);
+        fscanf(estoque, "%d\n", &produto_3.codigo);
         fflush(stdin);
-        fgets(dados3.nome, 40, estoque);
-        fgets(dados3.descricao, 250, estoque);
+        fgets(produto_3.nome, 40, estoque);
+        fgets(produto_3.descricao, 250, estoque);
         fflush(stdin);
-        fgets(dados3.lote, 20, estoque);
+        fgets(produto_3.lote, 20, estoque);
         fflush(stdin);
-        fscanf(estoque, "%f\n", &dados3.valor);
+        fscanf(estoque, "%f\n", &produto_3.valor);
         fflush(stdin);
-        fscanf(estoque, "%d\n", &dados3.unidades);
+        fscanf(estoque, "%d\n", &produto_3.unidades);
         fflush(stdin);
         fscanf(estoque, "%d %d %d\n", &validade.dia, &validade.mes, &validade.ano);
         fflush(stdin);
 
-        if(dados3.codigo == codigo_2)
+        if(produto_3.codigo == codigo_2)
             return 1;
     }
 
@@ -465,9 +468,9 @@ int Vendas()
     fflush(stdin);
     lerInfoProduto(codigo_2);
 
-    if(dados3.codigo != codigo_2)
+    if(produto_3.codigo != codigo_2)
     {
-        while(dados3.codigo != codigo_2)
+        while(produto_3.codigo != codigo_2)
         {
             printf("\nCÓDIGO INVÁLIDO!\nINFORME O CÓDIGO DO PRODUTO:\nEST");
             scanf("%d", &codigo_2);
@@ -476,19 +479,19 @@ int Vendas()
         }
     }
 
-    if(dados3.codigo == codigo_2)
+    if(produto_3.codigo == codigo_2)
     {
-        printf("\nINFORMAÇÕES SOBRE O PRODUTO:\n\n", dados3.codigo);
+        printf("\nINFORMAÇÕES SOBRE O PRODUTO:\n\n", produto_3.codigo);
         fflush(stdin);
-        printf("NOME:\t\t\t%s", dados3.nome);
+        printf("NOME:\t\t\t%s", produto_3.nome);
         fflush(stdin);
-        printf("DESCRIÇÃO:\t\t%s", dados3.descricao);
+        printf("DESCRIÇÃO:\t\t%s", produto_3.descricao);
         fflush(stdin);
-        printf("LOTE:\t\t\t%s", dados3.lote);
+        printf("LOTE:\t\t\t%s", produto_3.lote);
         fflush(stdin);
-        printf("VALOR:\t\t\tR$%.2f\n", dados3.valor);
+        printf("VALOR:\t\t\tR$%.2f\n", produto_3.valor);
         fflush(stdin);
-        printf("UNIDADES DISPONÍVEIS:\t%d\n", dados3.unidades);
+        printf("UNIDADES DISPONÍVEIS:\t%d\n", produto_3.unidades);
         fflush(stdin);
 
         if(validade.dia == 0)
@@ -507,7 +510,7 @@ int Vendas()
     printf("\nQUANTAS UNIDADES SERÃO VENDIDAS?\n");
     scanf("%d", &unidades);
     fflush(stdin);
-    while(unidades <= 0 || unidades > dados3.unidades)
+    while(unidades <= 0 || unidades > produto_3.unidades)
     {
         printf("\nQUANTIDADE INVÁLIDA!\nINSIRA A QUANTIDADE NOVAMENTE:\n");
         scanf("%d", &unidades);
@@ -515,16 +518,16 @@ int Vendas()
     }
 
     produtoVendido(codigo_2, unidades, dia, mes, ano, i);
-    printf("\nVALOR TOTAL: R$%.2f\n\n", dados3.valor * unidades);
+    printf("\nVALOR TOTAL: R$%.2f\n\n", produto_3.valor * unidades);
 
     vendas = fopen("HISTORICO_DE_VENDAS.txt", "a+");
 
-    fprintf(vendas, "%d\n", dados3.codigo);
+    fprintf(vendas, "%d\n", produto_3.codigo);
     fprintf(vendas, "%d\n", codigoDaVenda());
-    fputs(dados3.nome, vendas);
-    fputs(dados3.descricao, vendas);
-    fputs(dados3.lote, vendas);
-    fprintf(vendas, "%.2f\n", dados3.valor*unidades);
+    fputs(produto_3.nome, vendas);
+    fputs(produto_3.descricao, vendas);
+    fputs(produto_3.lote, vendas);
+    fprintf(vendas, "%.2f\n", produto_3.valor*unidades);
     fprintf(vendas, "%d\n", unidades);
     obterDataEHorario();
     fprintf(vendas, "%02d %02d %04d\n", validade.dia, validade.mes, validade.ano);
