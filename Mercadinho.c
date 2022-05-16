@@ -20,14 +20,12 @@ struct Dados dados;
 struct Dados dados2;
 struct Dados dados3;
 
-
 struct DataEHorario
 {
     int dia, mes, ano;
     int horas, minutos, segundos;
 };
 struct DataEHorario data_e_horario;
-
 
 struct Validade
 {
@@ -267,7 +265,7 @@ int codigoDoEstoque(int *pont)
     }
 }
 
-void RealocarDadosEstoque()
+void realocarDadosEstoque()
 {
     int a;
     char caractere;
@@ -358,10 +356,10 @@ void atualizarEstoque(int unidades, int codigo, int i)
     fclose(arq2);
     fclose(arq3);
 
-    RealocarDadosEstoque();
+    realocarDadosEstoque();
 }
 
-int ProdutoVendido(int codigo_2, int unidades, int dia, int mes, int ano, int i)
+int produtoVendido(int codigo_2, int unidades, int dia, int mes, int ano, int i)
 {
     int j = 0;
 
@@ -410,7 +408,7 @@ int ProdutoVendido(int codigo_2, int unidades, int dia, int mes, int ano, int i)
 return 0;
 }
 
-int LerInfoProduto(int codigo_2)
+int lerInfoProduto(int codigo_2)
 {
     FILE *estoque;
     estoque = fopen("ESTOQUE.txt", "r");
@@ -463,7 +461,7 @@ int Vendas()
     fflush(stdin);
     scanf("%d", &codigo_2);
     fflush(stdin);
-    LerInfoProduto(codigo_2);
+    lerInfoProduto(codigo_2);
 
     if(dados3.codigo != codigo_2)
     {
@@ -472,7 +470,7 @@ int Vendas()
             printf("\nCÓDIGO INVÁLIDO!\nDIGITE O CÓDIGO DO PRODUTO:\nEST");
             scanf("%d", &codigo_2);
             fflush(stdin);
-            LerInfoProduto(codigo_2);
+            lerInfoProduto(codigo_2);
         }
     }
 
@@ -514,7 +512,7 @@ int Vendas()
         fflush(stdin);
     }
 
-    ProdutoVendido(codigo_2, unidades, dia, mes, ano, i);
+    produtoVendido(codigo_2, unidades, dia, mes, ano, i);
     printf("\nVALOR TOTAL: R$%.2f\n\n", dados3.valor * unidades);
 
     vendas = fopen("HISTORICO_VENDAS.txt", "a+");
