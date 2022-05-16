@@ -6,7 +6,7 @@
 #include <time.h>
 #define RGSTRS "REGISTROS"
 
-struct Dados
+struct Produto
 {
     int codigo;
     int codigo2;
@@ -16,9 +16,9 @@ struct Dados
     float valor;
     int unidades;
 };
-struct Dados dados;
-struct Dados dados2;
-struct Dados dados3;
+struct Produto dados;
+struct Produto dados2;
+struct Produto dados3;
 
 struct DataEHorario
 {
