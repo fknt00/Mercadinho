@@ -125,12 +125,12 @@ void obterDataEHorario()
     t = time(NULL);
     local=localtime(&t);
 
-    data_e_horarioano = local -> tm_year+1900;
-    data_e_horariomes = local -> tm_mon+1;
-    data_e_horariodia = local -> tm_mday;
-    data_e_horariohoras = local -> tm_hour;
-    data_e_horariominutos = local -> tm_min;
-    data_e_horariosegundos = local -> tm_sec;
+    data_e_horario.ano = local -> tm_year+1900;
+    data_e_horario.mes = local -> tm_mon+1;
+    data_e_horario.dia = local -> tm_mday;
+    data_e_horario.horas = local -> tm_hour;
+    data_e_horario.minutos = local -> tm_min;
+    data_e_horario.segundos = local -> tm_sec;
 }
 
 int listar(FILE *arquivo)
@@ -160,7 +160,7 @@ int listar(FILE *arquivo)
         fflush(stdin);
 
         if(dados.codigo2 != 0)
-            fscanf(arquivo, "%d %d %d %d %d %d\n", &data_e_horariodia, &data_e_horariomes, &data_e_horarioano, &data_e_horariohoras, &data_e_horariominutos, &data_e_horariosegundos);
+            fscanf(arquivo, "%d %d %d %d %d %d\n", &data_e_horario.dia, &data_e_horario.mes, &data_e_horario.ano, &data_e_horario.horas, &data_e_horario.minutos, &data_e_horario.segundos);
 
         else
             fscanf(arquivo, "\n");
@@ -209,8 +209,8 @@ int listar(FILE *arquivo)
         }
         else if(dados.codigo2 != 0)
         {
-            printf("HORARIO DA VENDA:\t%02d:%02d:%02d\n", data_e_horariohoras, data_e_horariominutos, data_e_horariosegundos);
-            printf("DATA DA VENDA:\t\t%02d/%02d/%04d\n\n\n", data_e_horariodia, data_e_horariomes, data_e_horarioano);
+            printf("HORARIO DA VENDA:\t%02d:%02d:%02d\n", data_e_horario.horas, data_e_horario.minutos, data_e_horario.segundos);
+            printf("DATA DA VENDA:\t\t%02d/%02d/%04d\n\n\n", data_e_horario.dia, data_e_horario.mes, data_e_horario.ano);
         }
     }
 
@@ -532,7 +532,7 @@ int Vendas()
     fprintf(vendas, "%d\n", unidades);
     obterDataEHorario();
     fprintf(vendas, "%02d %02d %04d\n", validade.dia, validade.mes, validade.ano);
-    fprintf(vendas, "%02d %02d %04d %02d %02d %02d\n", data_e_horariodia, data_e_horariomes, data_e_horarioano, data_e_horariohoras, data_e_horariominutos, data_e_horariosegundos);
+    fprintf(vendas, "%02d %02d %04d %02d %02d %02d\n", data_e_horario.dia, data_e_horario.mes, data_e_horario.ano, data_e_horario.horas, data_e_horario.minutos, data_e_horario.segundos);
     fclose(vendas);
     atualizarEstoque(unidades, codigo_2, i);
 }
