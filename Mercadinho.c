@@ -16,12 +16,13 @@ struct DadosDoProduto
     float valor;
     int unidades;
 };
-struct DadosDoProduto dados;
+// struct DadosDoProduto dados;
 // struct DadosDoProduto dados2;
-struct DadosDoProduto dados3;
+// struct DadosDoProduto dados3;
 struct DadosDoProduto produto;
 struct DadosDoProduto produto_2;
 struct DadosDoProduto produto_3;
+
 
 struct DataEHorario
 {
@@ -31,6 +32,7 @@ struct DataEHorario
 // struct DataEHorario data_e_horario;
 struct DataEHorario data;
 struct DataEHorario horario;
+
 
 struct Validade
 {
@@ -142,23 +144,23 @@ int listar(FILE *arquivo)
 
     while(!feof(arquivo))
     {
-        fscanf(arquivo, "%d\n", &dados.codigo);
+        fscanf(arquivo, "%d\n", &produto.codigo);
         fflush(stdin);
-        fscanf(arquivo, "%d\n", &dados.codigo2);
+        fscanf(arquivo, "%d\n", &produto.codigo2);
         fflush(stdin);
-        fgets(dados.nome, 40, arquivo);
-        fgets(dados.descricao, 250, arquivo);
+        fgets(produto.nome, 40, arquivo);
+        fgets(produto.descricao, 250, arquivo);
         fflush(stdin);
-        fgets(dados.lote, 20, arquivo);
+        fgets(produto.lote, 20, arquivo);
         fflush(stdin);
-        fscanf(arquivo, "%f\n", &dados.valor);
+        fscanf(arquivo, "%f\n", &produto.valor);
         fflush(stdin);
-        fscanf(arquivo, "%d\n", &dados.unidades);
+        fscanf(arquivo, "%d\n", &produto.unidades);
         fflush(stdin);
         fscanf(arquivo, "%d %d %d", &validade.dia, &validade.mes, &validade.ano);
         fflush(stdin);
 
-        if(dados.codigo2 != 0)
+        if(produto.codigo2 != 0)
             fscanf(arquivo, "%d %d %d %d %d %d\n", &data.dia, &data.mes, &data.ano, &horario.horas, &horario.minutos, &horario.segundos);
 
         else
@@ -166,30 +168,30 @@ int listar(FILE *arquivo)
 
         fflush(stdin);
 
-        if(dados.codigo2 == 0)
+        if(produto.codigo2 == 0)
         {
-            printf("CÓDIGO DO PRODUTO:\tEST%d\n", dados.codigo);
+            printf("CÓDIGO DO PRODUTO:\tEST%d\n", produto.codigo);
         }
-        else if(dados.codigo2 != 0)
+        else if(produto.codigo2 != 0)
         {
-            printf("CÓDIGO DO PRODUTO:\tEST%d\n", dados.codigo);
-            printf("NOTA FISCAL:\t\tVND%d\n", dados.codigo2);
+            printf("CÓDIGO DO PRODUTO:\tEST%d\n", produto.codigo);
+            printf("NOTA FISCAL:\t\tVND%d\n", produto.codigo2);
         }
 
         fflush(stdout);
-        printf("NOME:\t\t\t%s", dados.nome);
-        printf("DESCRIÇÃO:\t\t%s", dados.descricao);
-        printf("LOTE:\t\t\t%s", dados.lote);
+        printf("NOME:\t\t\t%s", produto.nome);
+        printf("DESCRIÇÃO:\t\t%s", produto.descricao);
+        printf("LOTE:\t\t\t%s", produto.lote);
 
-        if(dados.codigo2 == 0)
+        if(produto.codigo2 == 0)
         {
-            printf("VALOR UNITÁRIO:\t\tR$%.2f\n", dados.valor);
-            printf("UNIDADES DISPONÍVEIS:\t%d\n", dados.unidades);
+            printf("VALOR UNITÁRIO:\t\tR$%.2f\n", produto.valor);
+            printf("UNIDADES DISPONÍVEIS:\t%d\n", produto.unidades);
         }
-        else if(dados.codigo2 != 0)
+        else if(produto.codigo2 != 0)
         {
-            printf("VALOR TOTAL:\t\tR$%.2f\n", dados.valor);
-            printf("UNIDADES VENDIDAS:\t%d\n", dados.unidades);
+            printf("VALOR TOTAL:\t\tR$%.2f\n", produto.valor);
+            printf("UNIDADES VENDIDAS:\t%d\n", produto.unidades);
         }
 
 
@@ -202,11 +204,11 @@ int listar(FILE *arquivo)
             printf("DATA DE VALIDADE:\t%02d/%02d/%04d\n", validade.dia, validade.mes, validade.ano);
         }
 
-        if(dados.codigo2 == 0)
+        if(produto.codigo2 == 0)
         {
             printf("\n\n");
         }
-        else if(dados.codigo2 != 0)
+        else if(produto.codigo2 != 0)
         {
             printf("HORARIO DA VENDA:\t%02d:%02d:%02d\n", horario.horas, horario.minutos, horario.segundos);
             printf("DATA DA VENDA:\t\t%02d/%02d/%04d\n\n\n", data.dia, data.mes, data.ano);
@@ -646,7 +648,7 @@ int comandos(int opcao)
                 break;
         case 6:
                 system("cls");
-                dados.codigo2 = 0;
+                produto.codigo2 = 0;
                 arquivo = fopen("ESTOQUE.txt", "r");
                 listar(arquivo);
                 system("pause");
