@@ -15,6 +15,7 @@ struct DadosDoProduto
     char lote[36];
     float valor;
     int unidades;
+    int dia, mes, ano;
 };
 // struct DadosDoProduto dados;
 // struct DadosDoProduto dados2;
